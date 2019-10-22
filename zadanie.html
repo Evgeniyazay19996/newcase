@@ -1,0 +1,76 @@
+
+<html>
+<body>
+
+<head>
+    <title>ФОрма обратной связи</title>
+<body>
+<?php
+if (isset ($_POST['email, surname, name, patronymic, message'])) {
+?><form class="contact_form" method="post">
+    <p>
+        <label>Фамилия:</label>
+        <label>
+            <input type="text" name="surname" placeholder="Введите вашу фамилию" required/>
+        </label>
+    </p>
+    <p>
+        <label>Имя:</label>
+        <label>
+            <input type="text" name="name" placeholder="Введите ваше имя" required/>
+        </label>
+    </p>
+    <p>
+        <label>Отчество:</label>
+        <label>
+            <input type="text" name="patronymic" placeholder="Введите ваше отчество" required/>
+        </label>
+    </p>
+    <p>
+        <label>Email:</label>
+        <label>
+            <input type="email" name="email" placeholder="Введите электронный адрес" required/>
+        </label>
+    </p>
+    <p>
+        <label>Текст сообщения:</label>
+        <label>
+            <textarea name="message" cols="60" rows="4" required ></textarea>
+        </label>
+    </p>
+    <p>
+        <button class="submit" type="submit">Отправить сообщение</button>
+    </p> <?php
+    }else{
+      $to = "zhenya_hear100@mail.ru";
+    $from = $_POST['email'];
+    $surname = $_POST['surname'];
+    $name = $_POST['name'];
+    $patronymic = $_POST['patronymic'];
+    $subject = "Форма отправки сообщений";
+    /** @var  оставил сообщения $message */
+    $message = $surname . $name . $patronymic . "оставил сообщение"  . "\n\n" . $_POST['message'];
+
+    mail("zhenya_hear100@mail.ru", 'Форма отправки сообщения', sprintf($surname, "Фамилия:"), sprintf( $name, "Имя:"), sprintf( $patronymic,"Отчество"));
+{
+    echo "Сообщение успешно отправлено";{
+    }}}else{{
+    {
+        echo "При отправке сообщения возникли ошибки";
+
+    }}}
+?>
+<?php
+
+$link = mysqli_connect('127.0.0.1:3306', 'root', '')
+or die('mysqli_error()' . 'Не удалось соединиться: ');
+echo 'Соединение успешно установлено';
+mysqli_select_db('testdb') or die('Не удалось выбрать базу данных');
+
+$query = '$sql = "SELECT * FROM `mytable`';
+die('mysqli_error()' . 'Запрос не удался: ') or $result = mysqli_query($query);
+?>
+</form>
+
+</body>
+</html>
